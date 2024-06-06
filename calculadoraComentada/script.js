@@ -104,6 +104,7 @@ class Calculator {
     if (this.previousOperand !== "") {
       this.calculate();
     }
+    //Se já houver um operando anterior, chama o método calculate para realizar a operação anterior.
 
     this.operation = operation;
 
@@ -116,6 +117,9 @@ class Calculator {
     if (this.currentOperand.includes(".") && number === ".") return;
     this.currentOperand = `${this.currentOperand}${number.toString()}`;
   }
+
+  // Impede a inserção de múltiplos pontos decimais.
+  //Adiciona um número ao operando atual.
 
   clear() {
     //  guardar os valores
@@ -132,6 +136,7 @@ class Calculator {
       this.currentOperand
     );
   }
+  //Atualiza o texto exibido nos elementos DOM para refletir o estado atual da calculadora.
 }
 
 // Instância da Calculadora e Adição de Eventos
@@ -143,6 +148,7 @@ const calculator = new Calculator(
 
 for (const numberButton of numberButtons) {
   numberButton.addEventListener("click", () => {
+    //Adiciona um event listener a cada botão de número.
     calculator.appendNumber(numberButton.innerText);
     calculator.updateDisplay();
   });
@@ -159,6 +165,9 @@ allClearButton.addEventListener("click", () => {
   calculator.clear();
   calculator.updateDisplay();
 });
+//Adiciona um event listener ao botão de limpar tudo.
+//Quando clicado, chama clear e updateDisplay na instância da calculadora.
+
 
 equalsButton.addEventListener("click", () => {
   calculator.calculate();

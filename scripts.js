@@ -75,12 +75,14 @@ class Calculator {
 
   chooseOperation(operation) {
     //operation = conteúdo do botão de operação que ele clicar
-    if (this.currentOperand === "") return;
 
+    if (this.currentOperand === "") return;
+    
 
     if (this.previousOperand !== "") {
       this.calculate();
     }
+    
 
     this.operation = operation;
 
@@ -93,6 +95,8 @@ class Calculator {
     if (this.currentOperand.includes(".") && number === ".") return;
     this.currentOperand = `${this.currentOperand}${number.toString()}`;
   }
+  
+
 
   clear() {
     //  guardar os valores
@@ -109,6 +113,7 @@ class Calculator {
       this.currentOperand
     );
   }
+  
 }
 
 // Instância da Calculadora e Adição de Eventos 
@@ -120,6 +125,7 @@ const calculator = new Calculator(
 
 for (const numberButton of numberButtons) {
   numberButton.addEventListener("click", () => {
+    
     calculator.appendNumber(numberButton.innerText);
     calculator.updateDisplay();
   });

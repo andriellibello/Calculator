@@ -14,12 +14,30 @@ class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement;
     this.currentOperandTextElement = currentOperandTextElement;
+    this.clear();
   }
+
+  chooseOperation(operation) {
+    //operation = conteudo do botao de operação que ele clicar
+    this.operation = operation;
+
+    rhis.previousOperand = this.currentOperand;
+    this.currentOperand = "";
+  }
+
+  appendNumber(number) {
+    // number = conteúdo do buttton que ta clicando
+    if (this.currentOperand.include(".") && number === ".") return;
+    this.currentOperand = `${this.currentOperand}${number.toString()}`;
+  }
+
   clear() {
+    //  guardar os valores
     this.currentOperand = "";
     this.previousOperand = "";
     this.operation = undefined;
   }
+
   updateDisplay() {
     this.previousOperandTextElement.innerText = this.previousOperand;
     this.currentOperandTextElement.innerText = this.currentOperand;
@@ -31,6 +49,19 @@ const calculator = new Calculator(
   currentOperandTextElement
 );
 
+for (const numberButton of numberButtons) {
+  numberButton.addEventListener("click", () => {
+    calculator.appendNumber(numberButton.innerText);
+    calculator.updateDisplay();
+  });
+}
+
+for(const operationButton of operationButtons) {
+  operationButton.addEventListener('click', () => {
+    calculator.chooseOperation(operationButton.innerText);
+    calculator.updateDisplay();
+  })
+}
 allClearButton.addEventListener("click", () => {
   calculator.clear();
   calculator.updateDisplay();
